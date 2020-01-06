@@ -1,0 +1,12 @@
+---
+layout: default
+---
+
+{% for block in site.blocks %}
+    {% case block.block %}
+        {% when 'bigcenter' %}{% include block/bigcenter.html item=block %}
+        {% when      'blog' %}{% include block/blog.html item=block %}
+        {% when  'carousel' %}{% include block/carousel.html item=block %}
+        {% when  'projects' %}{% include block/projects.html item=block %}
+    {% endcase %}
+{% endfor %}
