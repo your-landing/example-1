@@ -1,0 +1,43 @@
+---
+layout: default
+---
+
+{% include navbar.html %}
+
+<div class="container">
+    <div class="row justify-content-center my-5">
+        <div class="col-md-10">
+            {% if page.image %}
+            <img src="{{ page.image | relative_url }}" class="img-fluid rounded mx-auto d-block" alt="{{ page.title }}">
+            <hr>
+            {% endif %}
+
+            {% if page.blockquote %}
+
+            <blockquote class="blockquote">
+                <p class="mb-0">{{ content }}</p>
+                <footer class="blockquote-footer">
+                    {{ page.title }}
+                    {% if page.subtitle %}<cite title="Source Title"> {{ page.subtitle }}</cite>{% endif %}
+                </footer>
+            </blockquote>
+
+            {% else %}
+            <h1>{{ page.title }}</h1>
+
+            <div class="d-flex flex-column flex-md-row">
+                {%- if page.category -%}
+                <div class="mb-3 pr-3">
+                    <i class="far fa-folder"></i>
+                    {{ page.category | join: ', ' }}
+                </div>
+                {%- endif -%}
+            </div>
+
+            {{ content }}
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>

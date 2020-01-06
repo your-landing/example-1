@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+{% include navbar.html %}
+
+<div class="container">
+    <div class="row justify-content-center my-5">
+        <div class="col-md-10">
+            {% if page.image %}
+            <img src="{{ page.image | relative_url }}" class="img-fluid rounded mx-auto d-block" alt="{{ page.title }}">
+            <hr>
+            {% endif %}
+            <h1>{{ page.title }}</h1>
+
+            <div class="d-flex flex-column flex-md-row">
+                <div class="mb-2 pr-3">
+                    <i class="far fa-calendar-alt"></i>
+                    {{ page.date | date: '%F %R' }}
+                </div>
+                {%- if page.category -%}
+                <div class="mb-3 pr-3">
+                    <i class="far fa-folder"></i>
+                    {{ page.category | join: ', ' }}
+                </div>
+                {%- endif -%}
+            </div>
+
+            {{ content }}
+        </div>
+    </div>
+</div>
