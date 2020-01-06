@@ -1,0 +1,133 @@
+
+<header{% if include.item.background %}{% if include.item.background.size < 8 %} style="background-color: #{{ include.item.background | split: '#' | last | downcase }}"{% else %} style="background: url('{{ include.item.background | relative_url }}') no-repeat center center fixed; background-size: cover;"{% endif %}{% endif %}>
+
+    {% if include.item.url == '/blocks/1/' %}{% include navbar.html %}{% endif %}
+    <div class="container py-5">
+        <div class="row align-items-center justify-content-center">
+
+            <div class="col-md-8 text-center text-{{ include.item.color }}">
+                {% if include.item.title %}<h3>{{ include.item.title }}</h3>{% endif %}
+                {% if include.item.description %}<p>{{ include.item.description }}</p>{% endif %}
+                <hr class="my-5">
+            </div>
+
+            <div class="col-12">
+                <div class="row justify-content-center d-flex flex-column">
+
+                    <nav class="mb-5">
+                        <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-09r1ejtu2rj6v9lw-tab" data-toggle="tab" href="#nav-09r1ejtu2rj6v9lw" role="tab" aria-controls="nav-09r1ejtu2rj6v9lw" aria-selected="true">{{ site.projects_button }}</a>
+                            {% assign projects_categories = site.projects | map: "category" | uniq | compact %}
+                            {% for category in projects_categories %}
+                            <a class="nav-item nav-link" id="nav-{{ category | downcase | slugify }}-tab" data-toggle="tab" href="#nav-{{ category | downcase | slugify }}" role="tab" aria-controls="nav-{{ category | downcase | slugify }}" aria-selected="false">{{ category }}</a>
+                            {% endfor %}
+                        </div>
+                    </nav>
+
+                    <div class="tab-content" id="nav-tabContent">
+
+                        <div class="tab-pane fade show active" id="nav-09r1ejtu2rj6v9lw" role="tabpanel" aria-labelledby="nav-09r1ejtu2rj6v9lw-tab">
+                            <div class="card-columns">
+
+                                {% for project in site.projects | limit: 10 %}
+                                <div class="card{% if project.background %} bg-{{ project.background }}{% endif %}{% if project.color %} text-{{ project.color }}{% endif %}{% if project.align %} text-{{ project.align }}{% endif %}">
+
+                                    {% if project.blockquote %}
+
+                                    <blockquote class="blockquote mb-0 card-body">
+                                        <a class="text-dark" href="{{ project.url | relative_url }}">{{ project.excerpt }}</a>
+                                        <footer class="blockquote-footer">
+                                            <small class="text-muted">{{ project.title }}{% if project.subtitle %}<cite title="Source Title"> {{ project.subtitle }}</cite>{% endif %}</small>
+                                        </footer>
+                                    </blockquote>
+
+                                    {% else %}
+
+                                        {% if project.image %}
+                                    <a href="{{ project.url | relative_url }}">
+                                        <img class="card-img{% unless project.block %}-top{% endunless %}" src="{{ project.image | relative_url }}" alt="{{ project.title }}">
+                                    </a>
+                                        {% endif %}
+
+                                        {% unless project.block %}
+                                    <div class="card-body align-items-center">
+                                        <a href="{{ project.url | relative_url }}" class="card-link h5 text-dark">{{ project.title }}</a>
+                                        {% if project.category %}<small class="text-muted float-right">{{ project.category | first }}</small>{% endif %}
+                                        {% if project.description %}
+                                            {% if project.excerpt %}{{ project.excerpt }}{% endif %}
+                                        {% endif %}
+                                    </div>
+                                        {% endunless %}
+
+                                    {% endif %}
+
+                                </div><!-- /.card -->
+                                {% endfor %}
+
+                            </div><!-- /.card-columns -->
+                        </div><!-- /.tab-pane -->
+
+                        {% for category in projects_categories %}
+                        <div class="tab-pane fade" id="nav-{{ category | downcase | slugify }}" role="tabpanel" aria-labelledby="nav-{{ category | downcase | slugify }}-tab">
+                            <div class="card-columns">
+
+                                {% assign projects_by_category = site.projects | where: "category", category %}
+                                {% for project in projects_by_category %}
+                                <div class="card{% if project.background %} bg-{{ project.background }}{% endif %}{% if project.color %} text-{{ project.color }}{% endif %}{% if project.align %} text-{{ project.align }}{% endif %}">
+
+                                    {% if project.blockquote %}
+
+                                    <blockquote class="blockquote mb-0 card-body">
+                                        <a class="text-dark" href="{{ project.url | relative_url }}">{{ project.excerpt }}</a>
+                                        <footer class="blockquote-footer">
+                                            <small class="text-muted">{{ project.title }}{% if project.subtitle %}<cite title="Source Title"> {{ project.subtitle }}</cite>{% endif %}</small>
+                                        </footer>
+                                    </blockquote>
+
+                                    {% else %}
+
+                                        {% if project.image %}
+                                    <a href="{{ project.url | relative_url }}">
+                                        <img class="card-img{% unless project.block %}-top{% endunless %}" src="{{ project.image | relative_url }}" alt="{{ project.title }}">
+                                    </a>
+                                        {% endif %}
+
+                                        {% unless project.block %}
+                                    <div class="card-body align-items-center">
+                                        <a href="{{ project.url | relative_url }}" class="card-link h5 text-dark">{{ project.title }}</a>
+                                        {% if project.category %}<small class="text-muted float-right">{{ project.category | first }}</small>{% endif %}
+                                        {% if project.description %}
+                                            {% if project.excerpt %}{{ project.excerpt }}{% endif %}
+                                        {% endif %}
+                                    </div>
+                                        {% endunless %}
+
+                                    {% endif %}
+
+                                </div><!-- /.card -->
+                                {% endfor %}
+
+                            </div><!-- /.card-columns -->
+                        </div><!-- /.tab-pane -->
+                        {% endfor %}
+
+                    </div><!-- /.tab-content -->
+
+                </div> <!-- /.row -->
+            </div><!-- /.col-12 -->
+
+            {% if include.item.more %}
+            <div class="col-md-8">
+                <hr class="my-5">
+                <p>
+                    {{ include.item.more.text }}
+                    <a href="{{ include.item.more.button.url }}" class="btn btn-{% if include.item.more.button.outline %}outline-{% endif %}{{ include.item.more.button.color }} float-right">{{ include.item.more.button.name }}</a>
+                </p>
+                <hr class="my-5">
+            </div>
+            {% endif %}
+
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+
+</header>

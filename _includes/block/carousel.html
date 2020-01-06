@@ -1,0 +1,41 @@
+
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+
+    <ol class="carousel-indicators">
+
+        {% assign active = true %}
+        {% for carousel in include.item.images %}
+        <li data-target="#carouselExampleFade" data-slide-to="{% increment var %}"{% if active %} class="active"{% endif %}></li>
+            {% assign active = false %}
+        {% endfor %}
+
+    </ol>
+
+    <div class="carousel-inner">
+
+        {% assign active = true %}
+        {% for carousel in include.item.images %}
+        <div class="carousel-item{% if active %} active{% endif %}">
+            {% assign active = false %}
+            <img class="d-block w-100" src="{{ carousel.url | relative_url }}"{% if carousel.title %} alt="{{ carousel.title }}"{% endif %}>
+            {% if carousel.title or carousel.description %}
+            <div class="carousel-caption d-block">
+                {% if carousel.title %}<h5>{{ carousel.title }}</h5>{% endif %}
+                {% if carousel.description %}<p>{{ carousel.description }}</p>{% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+
+</div>

@@ -1,0 +1,36 @@
+
+<footer class="container py-5">
+    <div class="row">
+
+        <div class="col-12 col-md">
+            <div class="d-block mb-2">
+                {% if site.brand.type == 'title' %}
+                    {{ site.title }}
+                {% elsif site.brand.type == 'image' %}
+                    <img src="{{ site.brand.image | relative_url }}" width="120" height="30" alt="{{ site.brand.text | default: site.title }}">
+                {% elsif site.brand.type == 'text' %}
+                    {{ site.brand.text }}
+                {% endif %}
+            </div>
+            {% assign year_now = 'now' | date: '%Y' %}
+            {% assign year_old = site.copyright %}
+            <small class="d-block mb-3 text-muted">© {% if year_old != year_now %}{{ year_old }}-{% endif %}{{ year_now }}</small>
+        </div>
+
+        {% for footer in site.footer %}
+        <div class="col-6 col-md">
+            <h5>{{ footer.name }}</h5>
+            <ul class="list-unstyled text-small">
+                {% for link in footer.links %}
+                <li><a class="text-muted" href="{{ link.url }}">{{ link.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>

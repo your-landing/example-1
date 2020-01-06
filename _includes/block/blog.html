@@ -1,0 +1,43 @@
+
+<header{% if include.item.background %}{% if include.item.background.size < 8 %} style="background-color: #{{ include.item.background | split: '#' | last | downcase }}"{% else %} style="background: url('{{ include.item.background | relative_url }}') no-repeat center center fixed; background-size: cover;"{% endif %}{% endif %}>
+
+    {% if include.item.url == '/blocks/1/' %}{% include navbar.html %}{% endif %}
+    <div class="container py-5">
+        <div class="row align-items-center justify-content-center">
+
+            <div class="col-md-8 text-center text-{{ include.item.color }}">
+                {% if include.item.title %}<h3>{{ include.item.title }}</h3>{% endif %}
+                {% if include.item.description %}<p>{{ include.item.description }}</p>{% endif %}
+                <hr class="my-5">
+            </div>
+
+            <div class="col-12">
+                <div class="row justify-content-center">
+
+                    {% for post in site.posts | limit: 3 %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card">
+                            {% if post.image %}
+                            <a href="{{ post.url | relative_url }}">
+                                <img class="card-img-top" src="{{ post.image | relative_url }}" alt="{{ post.title }}">
+                            </a>
+                            {% endif %}
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <small class="text-muted">{{ post.date | date: '%F %R' }}</small>
+                                </p>
+                                <h5 class="card-title">{{ post.title }}</h5>
+                                <p class="card-text">{% if post.excerpt.size > 100 %}{{ post.excerpt | truncatewords: 15, '...' }}{% else %}{{ post.excerpt }}{% endif %}</p>
+                                <a href="{{ post.url | relative_url }}" class="card-link">{{ site.blog_button }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div><!-- /.col-12 -->
+
+        </div><!-- /.row -->
+    </div> <!-- /.container -->
+
+</header>

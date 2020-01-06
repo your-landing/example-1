@@ -1,0 +1,70 @@
+
+<nav class="navbar navbar-expand-lg navbar-{% if page.layout == 'blog' or page.layout == 'project' %}light{% else %}{{ site.navbar_color }}{% endif %}">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="{% link index.html %}">
+            {% if site.brand.type == 'title' %}
+                {{ site.title }}
+            {% elsif site.brand.type == 'image' %}
+                <img src="{{ site.brand.image | relative_url }}" width="120" height="30" alt="{{ site.brand.text | default: site.title }}">
+            {% elsif site.brand.type == 'text' %}
+                {{ site.brand.text }}
+            {% endif %}
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarExample">
+
+            <ul class="navbar-nav align-items-center ml-md-auto">
+                {% for service in site.navbar %}
+
+                {% if service.dropdown %}
+                <li class="nav-item dropdown mx-2">
+
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ service.name }}</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for dropdown in service.dropdown %}
+
+                        {% if dropdown.url %}
+                        {% if dropdown.active == true %}{% assign active = ' active' %}{% elsif dropdown.active == false %}{% assign active = ' disabled' %}{% else %}{% assign active = nil %}{% endif %}
+                        <a class="dropdown-item{{ active }}" href="{{ dropdown.url }}">{{ dropdown.name }}</a>
+
+                            {% if dropdown.divider %}
+                        <div class="dropdown-divider"></div>
+                            {% endif %}
+
+                        {% else %}
+                        <h6 class="dropdown-header">{{ dropdown.name }}</h6>
+                        {% endif %}
+
+                        {% endfor %}
+                    </div>
+
+                </li>
+                {% elsif service.description %}
+                <li class="nav-item dropdown mx-2">
+
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ service.name }}</a>
+                    <div class="dropdown-menu p-4 text-muted" aria-labelledby="navbarDropdown">
+                        <p class="mb-0">{{ service.description }}</p>
+                    </div>
+
+                </li>
+                {% else %}
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="{{ service.url }}">{{ service.name }}</a>
+                </li>
+                {% endif %}
+
+                {% endfor %}
+            </ul>
+
+        </div><!-- /#navbarExample -->
+
+    </div> <!-- /.container-fluid -->
+
+</nav>
