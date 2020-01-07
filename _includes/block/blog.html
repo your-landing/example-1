@@ -5,11 +5,13 @@
     <div class="container py-5">
         <div class="row align-items-center justify-content-center">
 
+            {% if include.item.title or include.item.description %}
             <div class="col-md-8 text-center text-{{ include.item.color }}">
                 {% if include.item.title %}<h3>{{ include.item.title }}</h3>{% endif %}
                 {% if include.item.description %}<p>{{ include.item.description }}</p>{% endif %}
                 <hr class="my-5">
             </div>
+            {% endif %}
 
             <div class="col-12">
                 <div class="row justify-content-center">
@@ -28,7 +30,7 @@
                                 </p>
                                 <h5 class="card-title">{{ post.title }}</h5>
                                 <p class="card-text">{% if post.excerpt.size > 100 %}{{ post.excerpt | truncatewords: 15, '...' }}{% else %}{{ post.excerpt }}{% endif %}</p>
-                                <a href="{{ post.url | relative_url }}" class="card-link">{{ site.blog_button }}</a>
+                                <a href="{{ post.url | relative_url }}" class="card-link">{{ site.blog_button | default: 'Read more' }}</a>
                             </div>
                         </div>
                     </div>

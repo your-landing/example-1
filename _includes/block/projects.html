@@ -5,18 +5,20 @@
     <div class="container py-5">
         <div class="row align-items-center justify-content-center">
 
+            {% if include.item.title or include.item.description %}
             <div class="col-md-8 text-center text-{{ include.item.color }}">
                 {% if include.item.title %}<h3>{{ include.item.title }}</h3>{% endif %}
                 {% if include.item.description %}<p>{{ include.item.description }}</p>{% endif %}
                 <hr class="my-5">
             </div>
+            {% endif %}
 
             <div class="col-12">
                 <div class="row justify-content-center d-flex flex-column">
 
                     <nav class="mb-5">
                         <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-09r1ejtu2rj6v9lw-tab" data-toggle="tab" href="#nav-09r1ejtu2rj6v9lw" role="tab" aria-controls="nav-09r1ejtu2rj6v9lw" aria-selected="true">{{ site.projects_button }}</a>
+                            <a class="nav-item nav-link active" id="nav-09r1ejtu2rj6v9lw-tab" data-toggle="tab" href="#nav-09r1ejtu2rj6v9lw" role="tab" aria-controls="nav-09r1ejtu2rj6v9lw" aria-selected="true">{{ site.projects_button | default: 'All' }}</a>
                             {% assign projects_categories = site.projects | map: "category" | uniq | compact %}
                             {% for category in projects_categories %}
                             <a class="nav-item nav-link" id="nav-{{ category | downcase | slugify }}-tab" data-toggle="tab" href="#nav-{{ category | downcase | slugify }}" role="tab" aria-controls="nav-{{ category | downcase | slugify }}" aria-selected="false">{{ category }}</a>
@@ -120,8 +122,8 @@
             <div class="col-md-8">
                 <hr class="my-5">
                 <p>
-                    {{ include.item.more.text }}
-                    <a href="{{ include.item.more.button.url }}" class="btn btn-{% if include.item.more.button.outline %}outline-{% endif %}{{ include.item.more.button.color }} float-right">{{ include.item.more.button.name }}</a>
+                    {% if include.item.more.text %}{{ include.item.more.text }}{% endif %}
+                    {% if include.item.more.button %}<a href="{{ include.item.more.button.url }}" class="btn btn-{% if include.item.more.button.outline %}outline-{% endif %}{{ include.item.more.button.color }} float-right">{{ include.item.more.button.name }}</a>{% endif %}
                 </p>
                 <hr class="my-5">
             </div>
