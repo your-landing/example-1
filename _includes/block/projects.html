@@ -6,7 +6,7 @@
         <div class="row align-items-center justify-content-center">
 
             {% if include.item.title or include.item.description %}
-            <div class="col-md-8 text-center text-{{ include.item.color }}">
+            <div class="col-md-8 text-center{% if include.item.color %} text-{{ include.item.color }}{% endif %}">
                 {% if include.item.title %}<h3>{{ include.item.title }}</h3>{% endif %}
                 {% if include.item.description %}<p>{{ include.item.description }}</p>{% endif %}
                 <hr class="my-5">
@@ -123,7 +123,7 @@
                 <hr class="my-5">
                 <p>
                     {% if include.item.more.text %}{{ include.item.more.text }}{% endif %}
-                    {% if include.item.more.button %}<a href="{{ include.item.more.button.url }}" class="btn btn-{% if include.item.more.button.outline %}outline-{% endif %}{{ include.item.more.button.color }} float-right">{{ include.item.more.button.name }}</a>{% endif %}
+                    {% if include.item.more.button %}<a href="{{ include.item.more.button.url }}" class="btn btn-{% if include.item.more.button.outline %}outline-{% endif %}{{ include.item.more.button.color | default: 'primary' }} float-right">{{ include.item.more.button.name }}</a>{% endif %}
                 </p>
                 <hr class="my-5">
             </div>

@@ -6,7 +6,7 @@
         <div class="row align-items-center justify-content-center">
 
             {% if include.item.title or include.item.description %}
-            <div class="col-md-8 text-center text-{{ include.item.color }}">
+            <div class="col-md-8 text-center{% if include.item.color %} text-{{ include.item.color }}{% endif %}">
                 {% if include.item.title %}<h3>{{ include.item.title }}</h3>{% endif %}
                 {% if include.item.description %}<p>{{ include.item.description }}</p>{% endif %}
                 <hr class="my-5">

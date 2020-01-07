@@ -10,7 +10,7 @@
                 {% if include.item.buttons %}
                 <div class="d-flex justify-content-around my-5">
                     {% for button in include.item.buttons %}
-                    <a href="{{ button.url }}" class="btn btn-{% if button.outline %}outline-{% endif %}{{ button.color }}">{{ button.name }}</a>
+                    <a href="{{ button.url }}" class="btn btn-{% if button.outline %}outline-{% endif %}{{ button.color | default: 'primary' }}">{{ button.name }}</a>
                     {% endfor %}
                 </div>
                 {% endif %}
