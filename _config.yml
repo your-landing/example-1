@@ -33,7 +33,6 @@ navbar:
   - name: About
     url: '#about'
   - name: Services
-    url: '#'
     dropdown:
       - name: Title One
       - name: Contacts
@@ -47,7 +46,6 @@ navbar:
       - name: Translate
         url: '#translate'
   - name: Description
-    url: '#'
     description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, temporibus.
   - name: Pricing
     url: '#pricing'
@@ -109,11 +107,11 @@ footer:
         url: '#'
 
 
-# Core
+# Core (don't change it if you don't know how to use it)
 collections:
   blocks:
     output: true
   projects:
     output: true
 permalink: /blog/:title/
-exclude: ['test']
+# exclude: ['test']
