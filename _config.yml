@@ -3,7 +3,7 @@ title: Your awesome title
 description: >- # this means to ignore newlines until "baseurl:"
   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dolores aliquam doloribus expedita error quod eos, inventore autem est ducimus numquam quisquam, deserunt saepe in quasi excepturi accusamus quas optio.
 baseurl: '/example-1' # the subpath of your site
-url: 'https://your-landing.gitlab.io' # the base hostname & protocol for your site
+url: 'https://your-landing.github.io' # the base hostname & protocol for your site
 
 
 # Header
